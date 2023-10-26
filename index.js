@@ -7,7 +7,7 @@ function foo() {
 
 function infinity() {
   setTimeout(() => {
-    console.log("бесконечное выполнение кода");
+    console.log("Бесконечное выполнение кода");
     infinity();
   }, 0);
 }
