@@ -14,7 +14,6 @@ function infinity() {
 
 infinity();
 
-
 //______Задание с классами_____//
 
 class Calculator {
@@ -32,13 +31,13 @@ class Calculator {
     this.num1 = num1;
     this.num2 = num2;
   }
-  set setX(x) {
+  setX(x) {
     if (typeof x !== "number" || isNaN(x) || !isFinite(x)) {
       throw new Error("Invalid input. x must be a valid number.");
     }
     this.num1 = x;
   }
-  set setY(y) {
+  setY(y) {
     if (typeof y !== "number" || isNaN(y) || !isFinite(y)) {
       throw new Error("Invalid input. y must be a valid number.");
     }
