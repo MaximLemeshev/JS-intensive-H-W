@@ -43,26 +43,27 @@ class Calculator {
     }
     this.num2 = y;
   }
-  logSum() {
+  logSum = () => {
     return this.num1 + this.num2;
-  }
-  logMul() {
+  };
+  logMul = () => {
     return this.num1 * this.num2;
-  }
-  logSub() {
+  };
+  logSub = () => {
     return this.num1 - this.num2;
-  }
-  logDiv() {
+  };
+  logDiv = () => {
     if (this.num2 === 0) {
       throw new Error("Division by zero is not allowed.");
     }
     return this.num1 / this.num2;
-  }
+  };
 }
 
 let calculator = new Calculator(2, 4);
 
-const logSumRef = calculator.logSum.bind(calculator);
-const logMulRef = calculator.logMul.bind(calculator);
-const logSubRef = calculator.logSub.bind(calculator);
-const logDivRef = calculator.logDiv.bind(calculator);
+const logSumRef = calculator.logSum;
+const logMulRef = calculator.logMul;
+const logSubRef = calculator.logSub;
+const logDivRef = calculator.logDiv;
+console.log(logDivRef());
