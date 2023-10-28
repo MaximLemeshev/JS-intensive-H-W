@@ -1,69 +1,45 @@
-function foo() {
-  setTimeout(() => {
-    console.log("Too much"), 0;
-  });
-  return foo();
-}
-
-function infinity() {
-  setTimeout(() => {
-    console.log("Бесконечное выполнение кода");
-    infinity();
-  }, 0);
-}
-
-infinity();
-
-//______Задание с классами_____//
-
-class Calculator {
-  constructor(num1, num2) {
-    if (
-      typeof num1 !== "number" ||
-      typeof num2 !== "number" ||
-      isNaN(num1) ||
-      isNaN(num2) ||
-      !isFinite(num1) ||
-      !isFinite(num2)
-    ) {
-      throw new Error("Invalid input. Both x and y must be valid numbers.");
+class Stack {
+  constructor(stackSize = 10) {
+    if (typeof stackSize !== "number" || isNaN(stackSize) || stackSize < 1) {
+      throw new Error("Invalid maximum size for the stack");
     }
-    this.num1 = num1;
-    this.num2 = num2;
+    this.stackSize = stackSize;
+    this.arr = new Array();
   }
-  setX(x) {
-    if (typeof x !== "number" || isNaN(x) || !isFinite(x)) {
-      throw new Error("Invalid input. x must be a valid number.");
+  push(el) {
+    if (this.arr.length >= this.stackSize) {
+      throw new Error("Stack is full");
     }
-    this.num1 = x;
+    this.arr.push(el);
   }
-  setY(y) {
-    if (typeof y !== "number" || isNaN(y) || !isFinite(y)) {
-      throw new Error("Invalid input. y must be a valid number.");
+  pop() {
+    if (this.arr.length == 0) {
+      throw new Error("Stack is empty");
     }
-    this.num2 = y;
+    return this.arr.pop();
   }
-  logSum = () => {
-    return this.num1 + this.num2;
-  };
-  logMul = () => {
-    return this.num1 * this.num2;
-  };
-  logSub = () => {
-    return this.num1 - this.num2;
-  };
-  logDiv = () => {
-    if (this.num2 === 0) {
-      throw new Error("Division by zero is not allowed.");
+  peek() {
+    if (this.arr.length == 0) {
+      throw new Error("Stack is empty");
+    } else {
+      return this.arr[this.arr.length - 1];
     }
-    return this.num1 / this.num2;
-  };
+  }
+  isEmpty() {
+    return this.arr.length === 0;
+  }
+  toArray() {
+    return this.arr;
+  }
+  static fromIterible(arg) {
+    if (arg?.[Symbol.iterator] instanceof Function) {
+      const newStack = new Stack(arg.length);
+      for (const elem of arg) {
+        newStack.push(elem);
+      }
+      return newStack;
+    } else {
+      throw new Error("Is not iterable");
+    }
+  }
 }
-
-let calculator = new Calculator(2, 4);
-
-const logSumRef = calculator.logSum;
-const logMulRef = calculator.logMul;
-const logSubRef = calculator.logSub;
-const logDivRef = calculator.logDiv;
-console.log(logDivRef());
